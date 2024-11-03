@@ -31,4 +31,4 @@ RUN npm install --omit=dev
 EXPOSE 3000
 
 # Define o comando para iniciar o aplicativo
-CMD ["node", "dist/src/main.js"]
+CMD ["node", "dist/main.js"]
