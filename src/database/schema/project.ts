@@ -40,6 +40,12 @@ export class ProjectModel {
   @Prop({ required: true, type: Date })
   requestDate: Date;
 
+  @Prop({ required: true, type: Number, unique: true })
+  sequence: number;
+
+  @Prop({ required: true, type: String, unique: true })
+  externalId: string;
+
   @Prop({ required: false, type: Date })
   createdAt: Date;
 
