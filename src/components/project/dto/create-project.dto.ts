@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsBoolean, IsNumber, IsOptional, IsDateString } from 'class-validator';
+import { IsNotEmpty, IsString, IsBoolean, IsNumber, IsOptional, IsDateString, IsEnum } from 'class-validator';
 import { Trim } from 'src/config/validators/trim';
+import { Complexity } from '../domain/enums/Complexity';
 
 export class CreateProjectDto {
   @ApiProperty({ required: true })
@@ -37,10 +38,10 @@ export class CreateProjectDto {
   @IsBoolean()
   impactStakeholders: boolean;
 
-  @ApiProperty({ required: true })
+  @ApiProperty({ required: true, enum: Complexity })
   @IsNotEmpty()
-  @IsString()
-  complexity: string;
+  @IsEnum(Complexity)
+  complexity: Complexity;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
