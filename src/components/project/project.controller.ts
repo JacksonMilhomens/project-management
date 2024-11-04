@@ -73,6 +73,14 @@ export class ProjectController {
     return projectPresenter.toJSON();
   }
 
+  @Get('/by-external-id/:externalId')
+  @ApiOperation({ summary: 'get a project by external ID' })
+  async findProjectByExternalId(@Param('externalId') externalId: string) {
+    const project = await this.projectService.findProjectByExternalId(externalId);
+    const projectPresenter = new ProjectPresenter(project);
+    return projectPresenter.toJSON();
+  }
+
   @Put(':id')
   @ApiOperation({ summary: 'update a project' })
   async update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
