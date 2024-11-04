@@ -6,6 +6,7 @@ export class ProjectPresenter {
   toJSON() {
     return {
       id: this.project.id,
+      externalId: this.project.externalId,
       name: this.project.name,
       department: this.project.department,
       requester: this.project.requester,
@@ -20,7 +21,6 @@ export class ProjectPresenter {
       financialGain: this.formatCurrency(this.project.financialGain),
       rangeOfGain: this.project.rangeOfGain,
       priorityLevel: this.project.priorityLevel,
-      externalId: this.project.externalId,
       requestDate: this.formatDate(this.project.requestDate),
       createdAt: this.formatDate(this.project.createdAt),
       updatedAt: this.formatDate(this.project.updatedAt),

@@ -34,6 +34,7 @@ export class ProjectDatabase implements ProjectRepository {
     return projectsData.map((project) => {
       return new Project(
         project.id,
+        project.externalId,
         project.name,
         project.department,
         project.requester,
@@ -45,7 +46,6 @@ export class ProjectDatabase implements ProjectRepository {
         project.monthlyRequests,
         project.averageTimeSpent,
         project.requestDate,
-        project.externalId,
         project.createdAt,
         project.updatedAt,
       );
@@ -59,6 +59,7 @@ export class ProjectDatabase implements ProjectRepository {
     }
     return new Project(
       projectData.id,
+      projectData.externalId,
       projectData.name,
       projectData.department,
       projectData.requester,
@@ -70,7 +71,6 @@ export class ProjectDatabase implements ProjectRepository {
       projectData.monthlyRequests,
       projectData.averageTimeSpent,
       projectData.requestDate,
-      projectData.externalId,
       projectData.createdAt,
       projectData.updatedAt,
     );
@@ -83,6 +83,7 @@ export class ProjectDatabase implements ProjectRepository {
     }
     return new Project(
       projectData.id,
+      projectData.externalId,
       projectData.name,
       projectData.department,
       projectData.requester,
@@ -94,7 +95,6 @@ export class ProjectDatabase implements ProjectRepository {
       projectData.monthlyRequests,
       projectData.averageTimeSpent,
       projectData.requestDate,
-      projectData.externalId,
       projectData.createdAt,
       projectData.updatedAt,
     );
