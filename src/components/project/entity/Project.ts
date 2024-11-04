@@ -16,6 +16,7 @@ export class Project {
     public readonly monthlyRequests: number,
     public readonly averageTimeSpent: number,
     public readonly requestDate: Date,
+    public readonly externalId: string,
     public readonly createdAt: Date,
     public readonly updatedAt: Date,
   ) {}
