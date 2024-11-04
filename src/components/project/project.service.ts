@@ -35,6 +35,10 @@ export class ProjectService {
     return await this.projectRepository.findOne(id);
   }
 
+  async findProjectByExternalId(externalId: string) {
+    return await this.projectRepository.findProjectByExternalId(externalId);
+  }
+
   async update(id: string, updateProjectDto: UpdateProjectDto) {
     return await this.projectRepository.update(id, updateProjectDto);
   }

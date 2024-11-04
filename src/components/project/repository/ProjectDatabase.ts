@@ -13,7 +13,9 @@ export class ProjectDatabase implements ProjectRepository {
   constructor(@InjectModel(ProjectModel.name) private readonly projectModel: Model<ProjectDocument>) {}
 
   async create(createProjectDto: CreateProjectDto): Promise<Types.ObjectId> {
-    return (await this.projectModel.create(createProjectDto)).id;
+    const sequence = await this.getSequence();
+    const externalId = await this.generateExternalId(sequence);
+    return (await this.projectModel.create({ ...createProjectDto, sequence, externalId })).id;
   }
 
   async findAll(paginate: Paginate, sortBy?: string, order: 'asc' | 'desc' = 'asc'): Promise<Project[]> {
@@ -43,6 +45,7 @@ export class ProjectDatabase implements ProjectRepository {
         project.monthlyRequests,
         project.averageTimeSpent,
         project.requestDate,
+        project.externalId,
         project.createdAt,
         project.updatedAt,
       );
@@ -67,6 +70,31 @@ export class ProjectDatabase implements ProjectRepository {
       projectData.monthlyRequests,
       projectData.averageTimeSpent,
       projectData.requestDate,
+      projectData.externalId,
+      projectData.createdAt,
+      projectData.updatedAt,
+    );
+  }
+
+  async findProjectByExternalId(externalId: string) {
+    const projectData = await this.projectModel.findOne({ externalId: externalId });
+    if (!projectData) {
+      throw new HttpException(`Project with id ${externalId} not found`, HttpStatus.NOT_FOUND);
+    }
+    return new Project(
+      projectData.id,
+      projectData.name,
+      projectData.department,
+      projectData.requester,
+      projectData.description,
+      projectData.status,
+      projectData.goal,
+      projectData.impactStakeholders,
+      projectData.complexity,
+      projectData.monthlyRequests,
+      projectData.averageTimeSpent,
+      projectData.requestDate,
+      projectData.externalId,
       projectData.createdAt,
       projectData.updatedAt,
     );
@@ -90,5 +118,14 @@ export class ProjectDatabase implements ProjectRepository {
 
   async countDocuments(): Promise<number> {
     return this.projectModel.countDocuments();
+  }
+
+  async getSequence(): Promise<number> {
+    const lastProject = await this.projectModel.findOne().sort({ sequence: -1 }).exec();
+    return lastProject ? lastProject.sequence + 1 : 1;
+  }
+
+  private async generateExternalId(sequence: number) {
+    return `PROJ-${String(sequence).padStart(3, '0')}`;
   }
 }
