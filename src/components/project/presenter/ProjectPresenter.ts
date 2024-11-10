@@ -33,8 +33,4 @@ export class ProjectPresenter {
       currency: 'BRL',
     }).format(value);
   }
-
-  private formatDate(date: Date): string {
-    return date.toLocaleDateString('pt-BR');
-  }
 }
