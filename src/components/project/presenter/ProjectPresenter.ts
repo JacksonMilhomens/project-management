@@ -21,9 +21,9 @@ export class ProjectPresenter {
       financialGain: this.formatCurrency(this.project.financialGain),
       rangeOfGain: this.project.rangeOfGain,
       priorityLevel: this.project.priorityLevel,
-      requestDate: this.formatDate(this.project.requestDate),
-      createdAt: this.formatDate(this.project.createdAt),
-      updatedAt: this.formatDate(this.project.updatedAt),
+      requestDate: this.project.requestDate,
+      createdAt: this.project.createdAt,
+      updatedAt: this.project.updatedAt,
     };
   }
 
